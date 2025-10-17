@@ -1,0 +1,10 @@
+build:
+  title: Simple Documentation Site
+  input-folder: docs
+  output-folder: build
+  related-title: See Also
+
+site:
+  name: Simple Docs
+  description: A minimal documentation site built with Markdown
+  version: 1.0.0-MVP
