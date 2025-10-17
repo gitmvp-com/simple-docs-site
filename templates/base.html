@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ config.site.name }}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="site-title">
+                <a href="{{ url_for('index') }}">{{ config.site.name }}</a>
+            </h1>
+            <p class="site-description">{{ config.site.description }}</p>
+        </div>
+    </header>
+
+    <div class="container main-container">
+        <aside class="sidebar">
+            <nav class="toc-nav">
+                <h3>Table of Contents</h3>
+                {% for section in toc %}
+                    <div class="toc-section">
+                        {% if section.href %}
+                            <a href="{{ url_for('view_doc', doc_path=section.href.replace('.md', '')) }}" class="toc-link">
+                                {{ section.title }}
+                            </a>
+                        {% else %}
+                            <span class="toc-title">{{ section.title }}</span>
+                        {% endif %}
+                        
+                        {% if section.topics %}
+                            <ul class="toc-topics">
+                                {% for topic in section.topics %}
+                                    <li>
+                                        <a href="{{ url_for('view_doc', doc_path=topic.href.replace('.md', '')) }}">
+                                            {{ topic.title }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </nav>
+        </aside>
+
+        <main class="content">
+            {% if error %}
+                <div class="error-message">
+                    <h2>{{ error }}</h2>
+                    <p>The page you're looking for doesn't exist.</p>
+                    <a href="{{ url_for('index') }}">Return to home</a>
+                </div>
+            {% else %}
+                {% block content %}{% endblock %}
+            {% endif %}
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Simple Documentation Site - MVP Version {{ config.site.version }}</p>
+            <p>Built with Python, Flask, and Markdown</p>
+        </div>
+    </footer>
+</body>
+</html>
