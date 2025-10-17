@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Home - {{ config.site.name }}{% endblock %}
+
+{% block content %}
+<div class="welcome-section">
+    <h1>Welcome to {{ config.site.name }}</h1>
+    <p class="lead">{{ config.site.description }}</p>
+    
+    <div class="quick-start">
+        <h2>Quick Start</h2>
+        <p>Get started with our documentation:</p>
+        <ul>
+            <li><a href="{{ url_for('view_doc', doc_path='intro') }}">Introduction</a> - Learn about the system</li>
+            <li><a href="{{ url_for('view_doc', doc_path='getting-started') }}">Getting Started</a> - Installation and setup</li>
+            <li><a href="{{ url_for('view_doc', doc_path='features') }}">Features</a> - Explore what's available</li>
+        </ul>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-card">
+            <h3>📝 Markdown-Based</h3>
+            <p>Write documentation using simple Markdown syntax with powerful extensions.</p>
+        </div>
+        <div class="feature-card">
+            <h3>📚 Organized TOC</h3>
+            <p>Easy navigation with YAML-based table of contents configuration.</p>
+        </div>
+        <div class="feature-card">
+            <h3>🎨 Clean Design</h3>
+            <p>Focus on content with a minimal, distraction-free interface.</p>
+        </div>
+        <div class="feature-card">
+            <h3>⚡ Fast & Simple</h3>
+            <p>Lightweight Python application with minimal dependencies.</p>
+        </div>
+    </div>
+
+    <div class="getting-started-cta">
+        <h2>Ready to Get Started?</h2>
+        <p>Follow our guide to set up your documentation site in minutes.</p>
+        <a href="{{ url_for('view_doc', doc_path='getting-started') }}" class="cta-button">Get Started →</a>
+    </div>
+</div>
+{% endblock %}
